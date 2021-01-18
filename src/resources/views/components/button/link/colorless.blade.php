@@ -1,0 +1,1 @@
+<a {{ $attributes->merge(['class' => 'rounded px-4 py-2', 'href' => '']) }}>{{ $slot }}</a>

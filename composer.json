@@ -1,0 +1,10 @@
+{
+    "name": "bigmom/poll",
+    "description": "Poll",
+    "require": {
+        "laravel/laravel": "^8.0",
+        "maatwebsite/excel": "^3.0"
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
