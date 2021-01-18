@@ -2,13 +2,11 @@
 
 namespace Bigmom\Poll\Actions\Vote;
 
-use App\Jobs\RecordVote;
+use Bigmom\Poll\Jobs\RecordVote;
 use Bigmom\Poll\Facades\Vote as VoteManager;
 use Bigmom\Poll\Models\Option;
-use Bigmom\Poll\Models\Vote;
 use Bigmom\Poll\Objects\Status;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
