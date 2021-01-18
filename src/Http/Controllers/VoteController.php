@@ -13,7 +13,7 @@ class VoteController extends Controller
     {
         $options = Vote::cast(
             $request->input('option'),
-            Auth::guard('poll')->user(),
+            Auth::guard(config('poll.voter-guard'))->user(),
             1
         );
 

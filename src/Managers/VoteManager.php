@@ -2,6 +2,7 @@
 
 namespace Bigmom\Poll\Managers;
 
+use Bigmom\Poll\Objects\Status;
 use Bigmom\Poll\Actions\Vote\CastVote;
 use Bigmom\Poll\Models\Vote;
 use Bigmom\Poll\Models\Question;
