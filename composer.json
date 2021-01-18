@@ -1,6 +1,18 @@
 {
     "name": "bigmom/poll",
     "description": "Poll",
+    "autoload": {
+        "psr-4": {
+            "Bigmom\\Poll\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bigmom\\Poll\\Providers\\PollServiceProvider"
+            ]
+        }
+    },
     "require": {
         "laravel/framework": "^8.0",
         "maatwebsite/excel": "^3.0"
