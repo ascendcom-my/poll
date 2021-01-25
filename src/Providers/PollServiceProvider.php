@@ -16,10 +16,6 @@ class PollServiceProvider extends ServiceProvider
     public function register()
     {
         config([
-            'auth.guards.poll' => array_merge([
-                'driver' => config('poll.guard.driver', 'session'),
-                'provider' => config('poll.guard.provider', 'users'),
-            ], config('auth.guards.poll', [])),
             'bigmom-auth.packages' => array_merge([[
                 'name' => 'Poll',
                 'description' => 'Poll/Vote',
