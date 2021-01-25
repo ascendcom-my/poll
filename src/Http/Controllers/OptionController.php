@@ -11,7 +11,7 @@ class OptionController extends Controller
 {
     public function getIndex(Question $question)
     {
-        return view('poll::option.index', compact('question'));
+        return view('bigmom-poll::option.index', compact('question'));
     }
 
     public function postUpdate(Option $option, Request $request)

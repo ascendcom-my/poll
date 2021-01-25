@@ -2,7 +2,7 @@
 
 use Bigmom\Poll\Facades\Vote;
 use Bigmom\Poll\Http\Controllers\Api\QuestionController as ApiQuestionController;
-use Bigmom\Poll\Http\Middleware\EnsureUserIsAuthorized;
+use Bigmom\Auth\Http\Middleware\EnsureUserIsAuthorized;
 use Bigmom\Poll\Http\Controllers\AuthController;
 use Bigmom\Poll\Http\Controllers\GroupController;
 use Bigmom\Poll\Http\Controllers\QuestionController;
@@ -11,16 +11,16 @@ use Bigmom\Poll\Http\Controllers\OptionController;
 use Bigmom\Poll\Http\Controllers\VoteController;
 use Bigmom\Poll\Managers\QuestionManager;
 use Bigmom\Poll\Models\Question;
+use Bigmom\Auth\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/poll')->name('poll.')->middleware(['web'])->group(function () {
-    Route::middleware([\Bigmom\Poll\Http\Middleware\RedirectIfAuthenticated::class])->group(function () {
-        Route::get('/', [AuthController::class, 'getLogin']);
-        Route::get('/login', [AuthController::class, 'getLogin'])->name('getLogin');
-        Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-    });
-    Route::middleware([\Bigmom\Poll\Http\Middleware\Authenticate::class, EnsureUserIsAuthorized::class])->group(function () {
+Route::prefix('/bigmom/poll')->name('bigmom-poll.')->middleware(['web'])->group(function () {
+    Route::middleware([Authenticate::class, EnsureUserIsAuthorized::class.':poll-manage'])->group(function () {
+        Route::get('/', function () {
+            return redirect()
+                ->route('bigmom-poll.question.getIndex');
+        });
         Route::prefix('/question')->name('question.')->group(function () {
             Route::get('/', [QuestionController::class, 'getIndex'])->name('getIndex');
             Route::post('/create', [QuestionController::class, 'postCreate'])->name('postCreate');
@@ -45,7 +45,6 @@ Route::prefix('/poll')->name('poll.')->middleware(['web'])->group(function () {
         Route::prefix('/vote')->name('vote.')->group(function () {
             Route::post('/', [VoteController::class, 'castVote'])->name('castVote');
         });
-        Route::post('/logout', [AuthController::class, 'postLogout'])->name('postLogout');
 
         Route::get('/debug', function () {
             $questions = (new QuestionManager)->getByGroup('question-all')
@@ -54,7 +53,7 @@ Route::prefix('/poll')->name('poll.')->middleware(['web'])->group(function () {
                 })->map(function ($value) {
                     return $value->token;
                 })->all();
-            return view('poll::debug', compact('questions'));
-        });
+            return view('bigmom-poll::debug', compact('questions'));
+        })->name('getDebug');
     });
 });

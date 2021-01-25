@@ -14,7 +14,7 @@ class ImportController extends Controller
 {
     public function getImport()
     {
-        return view('poll::question.import');
+        return view('bigmom-poll::question.import');
     }
 
     public function downloadTemplate()

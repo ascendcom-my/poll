@@ -2,8 +2,8 @@
     <input type="hidden" name="csrf-token" content="{{ csrf_token() }}">
     <input id="bigmom-poll-react-data" type="hidden"
         data-questions="{{ implode(',', $questions) }}"
-        data-voteRoute="{{ route('poll.vote.castVote') }}"
-        data-questionRoute="{{ route('poll.question.getJsonQuestions') }}" />
+        data-voteRoute="{{ route('bigmom-poll.vote.castVote') }}"
+        data-questionRoute="{{ route('bigmom-poll.question.getJsonQuestions') }}" />
     <div id="bigmom_poll_react_div"></div>
     <script src="{{ asset('vendor/poll/js/vote.js') }}" defer></script>
 </div>

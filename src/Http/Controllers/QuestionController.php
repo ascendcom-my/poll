@@ -12,7 +12,7 @@ class QuestionController extends Controller
 {
     public function getIndex()
     {
-        return view('poll::question.index', [
+        return view('bigmom-poll::question.index', [
             'questions' => Question::paginate(10)->withQueryString(),
             'questionTypes' => Question::TYPE,
         ]);

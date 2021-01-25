@@ -10,6 +10,6 @@ class QuestionTemplateExport implements FromView, ShouldAutoSize
 {
     public function view(): View
     {
-        return view('poll::export.template.question');
+        return view('bigmom-poll::export.template.question');
     }
 }

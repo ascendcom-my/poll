@@ -13,6 +13,6 @@ class QuestionSheet implements FromView, ShouldAutoSize
     {
         $questions = Question::with('options')->get();
 
-        return view('poll::export.sheet.question', compact('questions'));
+        return view('bigmom-poll::export.sheet.question', compact('questions'));
     }
 }

@@ -13,7 +13,7 @@ class GroupController extends Controller
         $questions = Question::where('group_id', rawurldecode($group))
             ->orderBy('sequence', 'asc')
             ->get();
-        return view('poll::group.index', compact('questions', 'group'));
+        return view('bigmom-poll::group.index', compact('questions', 'group'));
     }
 
     public function postSort(string $group, Request $request)

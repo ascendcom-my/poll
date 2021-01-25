@@ -20,6 +20,30 @@ class PollServiceProvider extends ServiceProvider
                 'driver' => config('poll.guard.driver', 'session'),
                 'provider' => config('poll.guard.provider', 'users'),
             ], config('auth.guards.poll', [])),
+            'bigmom-auth.packages' => array_merge([[
+                'name' => 'Poll',
+                'description' => 'Poll/Vote',
+                'routes' => [
+                    [
+                        'title' => 'Question list',
+                        'name' => 'bigmom-poll.question.getIndex',
+                        'permission' => 'poll-manage',
+                    ],
+                    [
+                        'title' => 'Import/Export',
+                        'name' => 'bigmom-poll.question.getImport',
+                        'permission' => 'poll-manage',
+                    ],
+                    [
+                        'title' => 'Example widget',
+                        'name' => 'bigmom-poll.getDebug',
+                        'permission' => 'poll-manage',
+                    ]
+                ],
+                'permissions' => [
+                    'poll-manage',
+                ]
+            ]], config('bigmom-auth.packages', []))
         ]);
 
         $this->app->singleton('vote', function ($app) {
@@ -38,18 +62,10 @@ class PollServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/poll.php' => config_path('poll.php'),
             ]);
-    
-            $this->publishes([
-                __DIR__.'/../stubs/PollServiceProvider.stub' => app_path('Providers/PollServiceProvider.php'),
-            ]);
 
             $this->publishes([
                 __DIR__.'/../public' => public_path('vendor/poll'),
             ], 'public');
-
-            $this->publishes([
-                __DIR__.'/../resources/views/auth' => resource_path('views/vendor/bigmom/poll/auth'),
-            ]);
 
             $this->publishes([
                 __DIR__.'/../resources/views/components/widget/' => resource_path('views/components/vendor/bigmom/poll/widget'),
@@ -64,6 +80,6 @@ class PollServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'poll');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'bigmom-poll');
     }
 }
