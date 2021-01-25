@@ -4,7 +4,7 @@ Voting/Polling package. Contains an example widget, but not the best.
 
 ## Installation
 
-- `composer require bigmom/hook`
+- `composer require bigmom/poll`
 - `php artisan vendor:publish`
 - `php artisan migrate`
 
