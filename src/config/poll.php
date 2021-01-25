@@ -1,17 +1,6 @@
 <?php
 
 return [
-    
-    'restrict-usage' => false,
-    
-    'allowed-users' => [
-        'admin@mail.io',
-    ],
-
-    'guard' => [
-        // 'driver' => 'session',
-        // 'provider' => 'users',
-    ],
 
     'default-group' => 'question-all',
 
