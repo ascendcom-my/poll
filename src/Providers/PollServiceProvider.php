@@ -66,6 +66,10 @@ class PollServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../resources/views/components/widget/' => resource_path('views/components/vendor/bigmom/poll/widget'),
             ]);
+
+            $this->publishes([
+                __DIR__.'/../Jobs' => app_path('Jobs/Poll'),
+            ], 'jobs');
         }
 
         $this->loadViewComponentsAs('vendor-bigmom-poll', [

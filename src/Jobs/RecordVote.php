@@ -1,6 +1,6 @@
 <?php
 
-namespace Bigmom\Poll\Jobs;
+namespace App\Jobs\Poll;
 
 use Bigmom\Poll\Actions\Vote\CastVote;
 use Bigmom\Poll\Models\Vote;

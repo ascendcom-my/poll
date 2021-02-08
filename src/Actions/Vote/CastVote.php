@@ -2,7 +2,7 @@
 
 namespace Bigmom\Poll\Actions\Vote;
 
-use Bigmom\Poll\Jobs\RecordVote;
+use App\Jobs\Poll\RecordVote;
 use Bigmom\Poll\Facades\Vote as VoteManager;
 use Bigmom\Poll\Models\Option;
 use Bigmom\Poll\Objects\Status;
