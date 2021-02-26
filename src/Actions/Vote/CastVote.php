@@ -36,7 +36,7 @@ class CastVote
             'option.*' => ['required', 'exists:options,token'],
             'voter_type' => ['required', 'string', 'max:191'],
             'weight' => ['required', 'integer'],
-            'voter_snapshot' => ['nullable', 'json', 'max:191'],
+            'voter_snapshot' => ['nullable', 'json'],
             'vote_at' => ['required', 'date'],
         ]);
 
