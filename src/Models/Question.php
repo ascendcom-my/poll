@@ -63,7 +63,7 @@ class Question extends Model
     
     public function getVoterCountAttribute()
     {
-        return Vote::where('question_id', $this->id)->distinct('voter')->count();
+        return Vote::where('question_id', $this->id)->distinct('voter_id')->count();
     }
 
     public function getFormattedStartAtAttribute()

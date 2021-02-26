@@ -5,6 +5,7 @@ namespace Bigmom\Poll\Http\Resources;
 use Bigmom\Poll\Facades\Vote;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class QuestionResource extends JsonResource
 {
@@ -24,6 +25,7 @@ class QuestionResource extends JsonResource
             'max' => $this->max,
             'token' => $this->token,
             'input_type' => $this->input_type,
+            'voter_count' => $this->voter_count,
         ];
 
         if ($this->allow_reveal_result) {
@@ -35,6 +37,13 @@ class QuestionResource extends JsonResource
         $user = Auth::guard(config('poll.voter-guard'))->user();
         if ($user) {
             $returnedArray['has_voted'] = Vote::checkVoted($user, $this->resource) ?: false;
+            $returnedArray['votes'] = Cache::rememberForever($user->id . '-' . $this->id . '-voted_options', function () use ($user) {
+                return $user->votes()
+                    ->where('question_id', $this->id)
+                    ->with('option')
+                    ->get()
+                    ->pluck('option.token');
+            });
         }
 
         return $returnedArray;
