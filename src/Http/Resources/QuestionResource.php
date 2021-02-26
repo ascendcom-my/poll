@@ -38,12 +38,20 @@ class QuestionResource extends JsonResource
         if ($user) {
             $returnedArray['has_voted'] = Vote::checkVoted($user, $this->resource) ?: false;
             $returnedArray['votes'] = Cache::rememberForever($user->id . '-' . $this->id . '-voted_options', function () use ($user) {
-                return $user->votes()
+                $votes = $user->votes()
                     ->where('question_id', $this->id)
                     ->with('option')
                     ->get()
                     ->pluck('option.token');
+                if (count($votes) === 0) {
+                    return null;
+                } else {
+                    return $votes;
+                }
             });
+            if ($returnedArray['votes'] === null) {
+                $returnedArray['votes'] = [];
+            }
         }
 
         return $returnedArray;
